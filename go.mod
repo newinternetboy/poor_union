@@ -23,12 +23,12 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-//远端包依赖指向本地
-replace (
-	github.com/newinternetboy/poor_union/conf => /Users/caoxiang/caoxiang/go/poor_union/conf
-	github.com/newinternetboy/poor_union/models => /Users/caoxiang/caoxiang/go/poor_union/models
-	github.com/newinternetboy/poor_union/pkg/e => /Users/caoxiang/caoxiang/go/poor_union/pkg/e
-	github.com/newinternetboy/poor_union/pkg/setting => /Users/caoxiang/caoxiang/go/poor_union/pkg/setting
-	github.com/newinternetboy/poor_union/routers => /Users/caoxiang/caoxiang/go/poor_union/routers
-	github.com/newinternetboy/poor_union/setting => /Users/caoxiang/caoxiang/go/poor_union/setting
-)
+// //未推送到远端的包依赖指向本地
+// replace (
+// 	github.com/newinternetboy/poor_union/conf => /Users/caoxiang/caoxiang/go/poor_union/conf
+// 	github.com/newinternetboy/poor_union/models => /Users/caoxiang/caoxiang/go/poor_union/models
+// 	github.com/newinternetboy/poor_union/pkg/e => /Users/caoxiang/caoxiang/go/poor_union/pkg/e
+// 	github.com/newinternetboy/poor_union/pkg/setting => /Users/caoxiang/caoxiang/go/poor_union/pkg/setting
+// 	github.com/newinternetboy/poor_union/routers => /Users/caoxiang/caoxiang/go/poor_union/routers
+// 	github.com/newinternetboy/poor_union/setting => /Users/caoxiang/caoxiang/go/poor_union/setting
+// )
