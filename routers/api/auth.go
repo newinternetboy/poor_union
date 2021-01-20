@@ -30,9 +30,10 @@ func GetAuth(c *gin.Context) {
 	data := make(map[string]interface{})
 	code := e.INVALID_PARAMS
 	if ok {
-		isExist := models.CheckAuth(username, password)
-		if isExist {
-			token, err := util.GenerateToken(username, password)
+		//使用用户的uid进行token的生成
+		uid := models.CheckAuth(username, password)
+		if uid > 0 {
+			token, err := util.GenerateToken(uid)
 			if err != nil {
 				code = e.ERROR_AUTH_TOKEN
 			} else {

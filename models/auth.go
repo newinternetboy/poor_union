@@ -13,12 +13,8 @@ type Auth struct {
 }
 
 //校验用户和密码是否正确
-func CheckAuth(username, password string) bool {
+func CheckAuth(username, password string) int {
 	var auth Auth
 	db.Select("id").Where(Auth{Username: username, Password: password}).First(&auth)
-	if auth.ID > 0 {
-		return true
-	} else {
-		return false
-	}
+	return auth.ID
 }

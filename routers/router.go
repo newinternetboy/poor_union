@@ -8,7 +8,6 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/newinternetboy/poor_union/middleware/jwt"
 	"github.com/newinternetboy/poor_union/pkg/setting"
 	"github.com/newinternetboy/poor_union/routers/api"
 	v1 "github.com/newinternetboy/poor_union/routers/api/v1"
@@ -24,7 +23,7 @@ func InitRouter() *gin.Engine {
 	//注册路由
 	apiv1 := router.Group("/api/v1")
 	//接入auth中间件
-	apiv1.Use(jwt.JWT())
+	// apiv1.Use(jwt.JWT())
 	{
 		apiv1.GET("/tags", v1.GetTags)
 		apiv1.POST("/tags", v1.AddTag)
