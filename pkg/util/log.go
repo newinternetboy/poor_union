@@ -7,13 +7,14 @@
 package util
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/astaxie/beego/validation"
+	"github.com/newinternetboy/poor_union/pkg/logging"
 )
 
 func ValidErrorPrintf(errors []*validation.Error) {
 	for _, err := range errors {
-		log.Printf("err.Key:%s;err.Message:%s", err.Key, err.Message)
+		logging.Error(fmt.Sprintf("err.Key:%s;err.Message:%s", err.Key, err.Message))
 	}
 }

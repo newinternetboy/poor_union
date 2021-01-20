@@ -7,13 +7,14 @@
 package v1
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
 	"github.com/newinternetboy/poor_union/models"
 	"github.com/newinternetboy/poor_union/pkg/e"
+	"github.com/newinternetboy/poor_union/pkg/logging"
 	"github.com/newinternetboy/poor_union/pkg/setting"
 	"github.com/newinternetboy/poor_union/pkg/util"
 	"github.com/unknwon/com"
@@ -38,7 +39,7 @@ func GetArticle(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("err.Key:%s, err.Message:%s", err.Key, err.Message)
+			logging.Error(fmt.Sprintf("err.Key:%s;err.Message:%s", err.Key, err.Message))
 		}
 	}
 	c.JSON(http.StatusOK, util.Response(code, data))
@@ -71,7 +72,7 @@ func GetArticles(c *gin.Context) {
 		data["total"] = models.GetArticleTotal(maps)
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("err.Key:%s, err.Message:%s", err.Key, err.Message)
+			logging.Error(fmt.Sprintf("err.Key:%s;err.Message:%s", err.Key, err.Message))
 		}
 	}
 	c.JSON(http.StatusOK, util.Response(code, data))
@@ -112,7 +113,7 @@ func AddArticle(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("err.Key:%s, err.Message:%s", err.Key, err.Message)
+			logging.Error(fmt.Sprintf("err.Key:%s;err.Message:%s", err.Key, err.Message))
 		}
 	}
 	c.JSON(http.StatusOK, util.Response(code, make(map[string]interface{})))

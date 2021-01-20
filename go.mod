@@ -32,4 +32,5 @@ require (
 // 	github.com/newinternetboy/poor_union/pkg/setting => /Users/caoxiang/caoxiang/go/poor_union/pkg/setting
 // 	github.com/newinternetboy/poor_union/routers => /Users/caoxiang/caoxiang/go/poor_union/routers
 // 	github.com/newinternetboy/poor_union/setting => /Users/caoxiang/caoxiang/go/poor_union/setting
+// 	github.com/newinternetboy/poor_union/pkg/logging => /Users/caoxiang/caoxiang/go/poor_union/pkg/logging
 // )

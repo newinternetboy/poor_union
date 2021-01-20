@@ -126,6 +126,8 @@ func DeleteTag(c *gin.Context) {
 		} else {
 			code = e.ERROR_NOT_EXIST_TAG
 		}
+	} else {
+		util.ValidErrorPrintf(valid.Errors)
 	}
 
 	c.JSON(http.StatusOK, util.Response(code, make(map[string]string)))
