@@ -8,13 +8,19 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
+	_ "github.com/newinternetboy/poor_union/docs"
 	"github.com/newinternetboy/poor_union/pkg/setting"
 	"github.com/newinternetboy/poor_union/routers/api"
 	v1 "github.com/newinternetboy/poor_union/routers/api/v1"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitRouter() *gin.Engine {
 	router := gin.New()
+	//swagger文档自动生成
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 

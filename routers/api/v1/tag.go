@@ -18,7 +18,14 @@ import (
 	"github.com/unknwon/com"
 )
 
-//获取多个标签
+// @Summary 获取标签列表
+// @Description 根据name、state可选项获取指定标签
+// @Accept	json
+// @Produce	json
+// @Param name query string false "Name"
+// @Param state query int false "State"
+// @Success 200 {string} json "{"code":200,"data":{},"msg":"ok"}"
+// @Router  /api/v1/tags [get]
 func GetTags(c *gin.Context) {
 	//处理参数
 	name := c.Query("name")

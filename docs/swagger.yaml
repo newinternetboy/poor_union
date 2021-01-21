@@ -1,0 +1,26 @@
+info:
+  contact: {}
+paths:
+  /api/v1/tags:
+    get:
+      consumes:
+      - application/json
+      description: 根据name、state可选项获取指定标签
+      parameters:
+      - description: Name
+        in: query
+        name: name
+        type: string
+      - description: State
+        in: query
+        name: state
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"code":200,"data":{},"msg":"ok"}'
+          schema:
+            type: string
+      summary: 获取标签列表
+swagger: "2.0"
