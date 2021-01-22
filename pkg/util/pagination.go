@@ -16,7 +16,7 @@ func GetPageOffset(c *gin.Context) int {
 	offset := 0
 	page, _ := com.StrTo(c.Query("page")).Int()
 	if page > 0 {
-		offset = (page - 1) * setting.PageSize
+		offset = (page - 1) * setting.AppSetting.PageSize
 	}
 	return offset
 }

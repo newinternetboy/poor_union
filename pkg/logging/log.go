@@ -35,10 +35,14 @@ const (
 	FATAL
 )
 
-func init() {
-	filepath := getLogFileFullPath()
-	F = openLogFile(filepath)
-
+func Setup() {
+	var err error
+	filePath := getLogFilePath()
+	fileName := getLogFileName()
+	F, err = openLogFile(fileName, filePath)
+	if err != nil {
+		log.Fatalln(err)
+	}
 	logger = log.New(F, DefaultPrefix, log.LstdFlags)
 }
 

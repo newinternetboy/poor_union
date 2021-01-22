@@ -13,7 +13,7 @@ import (
 	"github.com/newinternetboy/poor_union/pkg/setting"
 )
 
-var jwtSecret = []byte(setting.JwtSecret)
+var jwtSecret = []byte(setting.AppSetting.JwtSecret)
 
 type Claims struct {
 	UID int `json:"u_id"`

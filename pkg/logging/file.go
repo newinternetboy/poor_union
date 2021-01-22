@@ -8,46 +8,40 @@ package logging
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"time"
-)
 
-var (
-	LogSavePath               = "runtime/logs/"
-	LogSaveName               = "log"
-	LogFileExt                = "log"
-	TimeFormat                = "20060102"
-	HourDurationLogTimeFormat = "15"
+	"github.com/newinternetboy/poor_union/pkg/file"
+	"github.com/newinternetboy/poor_union/pkg/setting"
 )
 
 func getLogFilePath() string {
-	return fmt.Sprintf("%s/%s/", LogSavePath, time.Now().Format(TimeFormat))
+	return fmt.Sprintf("%s%s/", setting.AppSetting.RuntimeRootPath+setting.AppSetting.LogSavePath, time.Now().Format(setting.AppSetting.TimeFormat))
 }
 
-func getLogFileFullPath() string {
-	return fmt.Sprintf("%s%s.%s", getLogFilePath(), time.Now().Format(HourDurationLogTimeFormat), LogFileExt)
+func getLogFileName() string {
+	return fmt.Sprintf("%s%s.%s", getLogFilePath(), time.Now().Format(setting.AppSetting.HourDurationLogTimeFormat), setting.AppSetting.LogFileExt)
 }
 
-func openLogFile(filepath string) *os.File {
-	_, err := os.Stat(filepath)
-	switch {
-	case os.IsNotExist(err):
-		mkDir()
-	case os.IsPermission(err):
-		log.Fatalf("Permission: %v", err)
-	}
-	handle, err := os.OpenFile(filepath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+func openLogFile(fileName, filepath string) (*os.File, error) {
+	dir, err := os.Getwd()
 	if err != nil {
-		log.Fatalf("Fail to OpenFile:%v", err)
+		return nil, fmt.Errorf("os.Getwd err:%v", err)
 	}
-	return handle
-}
 
-func mkDir() {
-	dir, _ := os.Getwd()
-	err := os.MkdirAll(dir+"/"+getLogFilePath(), os.ModePerm)
-	if err != nil {
-		panic(err)
+	src := dir + "/" + filepath
+	perm := file.CheckPermission(src)
+	if perm == true {
+		return nil, fmt.Errorf("file.CheckPermission Permission denied src: %s", src)
 	}
+	err = file.IsNotExistMkDir(src)
+	if err != nil {
+		return nil, fmt.Errorf("file.IsNotExistMkDir src: %s, err: %v", src, err)
+	}
+	f, err := file.Open(fileName, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	if err != nil {
+		return nil, fmt.Errorf("Fail to OpenFile :%v", err)
+	}
+
+	return f, nil
 }
